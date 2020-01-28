@@ -26,23 +26,23 @@ let expenses2 = prompt('Введите обязательную статью р�
 let amount2 = +prompt('Во сколько вам это обойдется?');
 
 
-let getExpensesMonth = function(num1, num2) {
-	return num1 + num2;
+let getExpensesMonth = function() {
+	return amount1 + amount2;
 }
 
-let getAccumulatedMonth = function(money, expenses) {
-	return money - expenses;
+let getAccumulatedMonth = function() {
+	return money - getExpensesMonth(amount1, amount2);
 }
 
-let getTargetMonth = function(target, money) {
-	let sum = target / money;
+let getTargetMonth = function() {
+	let sum = mission / accumulatedMonth;
 	return console.log(sum);
 }
 
-console.log(getExpensesMonth(amount1, amount2));
-getAccumulatedMonth(money, getExpensesMonth(amount1, amount2));
-let accumulatedMonth = getAccumulatedMonth(money, getExpensesMonth(amount1, amount2));
-getTargetMonth(mission, accumulatedMonth);
+console.log(getExpensesMonth());
+getAccumulatedMonth();
+let accumulatedMonth = getAccumulatedMonth();
+getTargetMonth();
 
 let missionDone = Math.round(mission / accumulatedMonth);
 console.log('Цель будет достигнута за' + ' ' + missionDone + ' ' + 'месяцев');
