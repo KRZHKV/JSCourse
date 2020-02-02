@@ -1,28 +1,49 @@
 'use strict';
 
-let isNumber = function(n) {
+
+
+function getRandomInt(max) {
+	return Math.floor(Math.random() * max);
+}
+
+function isNum(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-let quiz = function() {
-	let answer = 66;
-	let tryAnswer = function() {
-		let number = +prompt('Угадай число от 1 до 100');
-		if ( number === answer) {
-			alert('Отлично, ты Угадал!');
-		} else if (number > answer) {
-			alert('Загаданное число меньше');
-			tryAnswer();
-		} else if (number < answer){
-			alert('Загаданное число больше');
-			tryAnswer();
-		} else if (!isNumber(number)) { 
-			alert('Введи число!')
-			tryAnswer();
+
+const quizStart = function() {
+
+	const randomNumber = getRandomInt(100);
+
+	function quiz() {
+
+		const answer = prompt('Угадай число от 1 до 100');
+	
+		if (answer === null) {
+			alert('До свидания!');
+			return;
 		}
+	
+		if (isNum(answer)) {
+		const number = +answer;
+	
+		if (number > randomNumber) {
+			alert('Загаданное число меньше');
+			quiz();
+		} else if (number < randomNumber) {
+			alert('Загаданное число больше');
+			quiz();
+		} else {
+			alert('Вы угадали!');
+		}
+	} else {
+		alert('Введите число');
+		quiz();
 	}
-	tryAnswer();
+	}
 
+	quiz();
 }
+quizStart();
 
-quiz();
+
