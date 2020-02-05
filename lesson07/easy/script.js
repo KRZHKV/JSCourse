@@ -49,7 +49,7 @@ let appData = {
 		return appData.expensesMonth;
 	},
 	getBudget: function() {
-			appData.budgetMonth = money - appData.getExpensesMonth();
+			appData.budgetMonth = money - appData.expensesMonth;
 			appData.budgetDay = parseInt(appData.budgetMonth / 30);
 		
 	},
@@ -75,10 +75,9 @@ let appData = {
 
 }
 appData.asking();
-appData.getExpensesMonth();
 appData.getBudget();
 console.log(appData.getExpensesMonth());
-console.log(appData.getTargetMonth());
+console.log(appData.expensesMonth);
 console.log(appData.getStatusIncome());
 console.log('Наша программа включает в себя данные');
 let showStatus = function() {
