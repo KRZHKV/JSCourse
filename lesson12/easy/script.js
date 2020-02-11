@@ -28,7 +28,6 @@ let start = document.getElementById('start'),
 
 
 
-
 function isNumber(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 }
@@ -53,7 +52,7 @@ let appData = {
 	budgetMonth: 0,
 	expensesMonth: 0,
 	start: function() {
-		
+		console.log(this);
 	
 		if(salaryAmount.value === '') {
 			alert('Ошибка, поле Месячный доход должно быть заполнено!');
@@ -63,6 +62,7 @@ let appData = {
 
 		appData.getExpenses();
 		appData.getIncome();
+		appData.getIncomeMonth();
 		appData.getExpensesMonth();
 		appData.getAddExpenses();
 		appData.getAddIncome();
@@ -77,7 +77,7 @@ let appData = {
 		addictionalExpensesValue.value = appData.addExpenses.join(', ');
 		addictionalIncomeValue.value = appData.addIncome.join(', ');
 		targetMonthValue.value = appData.getTargetMonth();
-		let checkPeriod = document.addEventListener('input', function() {
+		let checkPeriod = document.addEventListener('change', function() {
 			incomePeriodValue.value = appData.calcSavedMoney();
 		});
 	},
@@ -113,13 +113,11 @@ let appData = {
 		});
 	},
 	getIncome: function() {
-
 		incomeItems.forEach(function(item) {
 			let itemIncome = item.querySelector('.income-title').value;
 			let cashIncome = item.querySelector('.income-amount').value;
 			if(itemIncome !== '' && cashIncome !=='') {
-				appData.income[itemIncome] = +cashIncome;
-				appData.incomeMonth = +cashIncome;		
+				appData.income[itemIncome] = cashIncome;		
 			}
 		});
 	},
@@ -145,6 +143,12 @@ let appData = {
 				appData.expensesMonth = +appData.expensesMonth + +appData.expenses[key];
 		}
 		return appData.expensesMonth;
+	},
+	getIncomeMonth: function() {
+		for (let key in appData.income) {
+			appData.incomeMonth += +appData.income[key];
+	}
+	return appData.incomeMonth;
 	},
 	getBudget: function() {
 			appData.budgetMonth = +appData.budget + +appData.incomeMonth - +appData.expensesMonth;
@@ -191,23 +195,13 @@ let showStatus = function() {
 	}
 	
 }
-// showStatus();
+
 appData.getInfoDeposit();
 
 
-start.addEventListener('click', appData.start);
+start.addEventListener('click', appData.start.bind(appData));
+console.log(start);
 expensesAdd.addEventListener('click', appData.addExpensesBlock);
 incomeAdd.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.changePeriod);
 
-
-start.disabled = true;
-
-salaryAmount.addEventListener('input', function() {
-	if (salaryAmount.value === '') {
-		start.disabled = true;
-	} else {
-		start.disabled = false;
-	}
-
-});
