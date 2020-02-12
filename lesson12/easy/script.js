@@ -195,6 +195,7 @@ let appData = {
 		allInput.forEach(function (item) {
 			item.value = '';
 			item.disabled = false;
+			start.disabled = true;
 		});
 
 	}
