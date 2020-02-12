@@ -141,8 +141,8 @@ let appData = {
 		}, this);
 	},
 	getExpensesMonth: function () {
-		for (let key in appData.expenses) {
-			this.expensesMonth = +appData.expensesMonth + +this.expenses[key];
+		for (let key in this.expenses) {
+			this.expensesMonth = +this.expensesMonth + +this.expenses[key];
 		}
 		return this.expensesMonth;
 	},
@@ -209,6 +209,7 @@ let appData = {
 // 	}
 // }
 // // showStatus();
+
 appData.getInfoDeposit();
 
 
@@ -216,7 +217,6 @@ start.addEventListener('click', appData.start.bind(appData));
 expensesAdd.addEventListener('click', appData.addExpensesBlock);
 incomeAdd.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.changePeriod);
-
 
 start.disabled = true;
 
