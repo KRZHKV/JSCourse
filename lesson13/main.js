@@ -6,15 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const completedList = document.getElementById('completed');
     const headerInput = document.querySelector('.header-input');
     
+    // создаем объект
     let data = {
         todo: [],
         completed: []
     };
 
+    // проверяем localStorage на проверку данных
     if(localStorage.getItem('localData')) {
         data = JSON.parse(localStorage.getItem('localData'));
     }
 
+    // рендерит объект Data если в нем что-то есть и подгружает данные
     const renderItemsForUpdate = function() {
         if(!data.todo.length && !data.completed.length) return 
 
@@ -26,11 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    //Добавляет данные в localStorage
     const dataUpdateToLocalS = function () {
         localStorage.setItem('localData', JSON.stringify(data));
         console.log(localStorage.getItem('localData'));
     }
 
+    // добавляет элемент на страницу
     const addItem = function(text) {
         renderItem(text);
         headerInput.value = '';
@@ -39,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         dataUpdateToLocalS();
     };
 
+    // Удаляет элемент
     const itemRemove = function(elem) {
         const item = elem.parentNode.parentNode;
         const itemParent = item.parentNode;
@@ -56,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         dataUpdateToLocalS();
     };
+
+    // Перенесит элемент из todo в Completed
     const itemComplete = function(elem) {
         const item = elem.parentNode.parentNode;
         const itemParent = item.parentNode;
@@ -84,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
        
     };
 
+    //рендеринг одного элемента
     const renderItem = function(text, completed = false) {
         const item = document.createElement('li');
         const btnBlock = document.createElement('div');
@@ -91,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnComplete = document.createElement('button');
 
         let list = todoList;
+        // если completed = true то рендерится в список выполненных
         if(completed) {
             list = completedList;
         } else {
@@ -121,15 +131,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 
+    //обработчик сабмита, когда добавляем todoшку
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
         if(headerInput.value !== '') {
-            addItem(headerInput.value);
+            addItem(headerInput.value.trim());
 
         }
     });
-
+    // вызов функции, которая при наличии данных в localStorage отрендерит их
     renderItemsForUpdate();
 
 })
