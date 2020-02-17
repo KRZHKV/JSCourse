@@ -1,6 +1,6 @@
 'use strict';
 
-let start = document.getElementById('start'),
+let startBtn = document.getElementById('start'),
 	btnPlus = document.getElementsByTagName('button'),
 	incomeAdd = btnPlus[0],
 	expensesAdd = btnPlus[1],
@@ -23,7 +23,7 @@ let start = document.getElementById('start'),
 	targetAmount = document.querySelector('.target-amount'),
 	periodSelect = document.querySelector('.period-select'),
 	periodAmount = document.querySelector('.period-amount'),
-	cancel = document.querySelector('#cancel'),
+	cancelBtn = document.querySelector('#cancel'),
 	incomeItems = document.querySelectorAll('.income-items');
 
 
@@ -56,7 +56,6 @@ const AppData = function () {
 }
 
 AppData.prototype.start = function () {
-	start = function () {
 
 		if (salaryAmount.value === '') {
 			alert('Ошибка, поле Месячный доход должно быть заполнено!');
@@ -73,7 +72,6 @@ AppData.prototype.start = function () {
 		this.calcSavedMoney();
 		this.showResult();
 
-	};
 };
 AppData.prototype.showResult = function () {
 	budgetMonthValue.value = this.budgetMonth;
@@ -183,16 +181,16 @@ AppData.prototype.calcSavedMoney = function () {
 	return this.budgetMonth * periodSelect.value;
 };
 AppData.prototype.freezeMenu = function () {
-	start.style.display = 'none';
-	cancel.style.display = 'block';
+	startBtn.style.display = 'none';
+	cancelBtn.style.display = 'block';
 	let allInput = document.querySelectorAll('input[type=text]');
 	allInput.forEach(function (item) {
 		item.disabled = true;
 	});
 };
 AppData.prototype.resetMenu = function () {
-	cancel.style.display = 'none';
-	start.style.display = 'block';
+	cancelBtn.style.display = 'none';
+	startBtn.style.display = 'block';
 	let allInput = document.querySelectorAll('input[type=text]');
 	allInput.forEach(function (item) {
 		item.value = '';
@@ -206,19 +204,19 @@ AppData.prototype.eventListeners = function () {
 	expensesAdd.addEventListener('click', appData.addExpensesBlock);
 	incomeAdd.addEventListener('click', appData.addIncomeBlock);
 	periodSelect.addEventListener('input', appData.changePeriod);
-	start.disabled = true;
+	startBtn.disabled = true;
 
 	salaryAmount.addEventListener('input', function () {
 		if (salaryAmount.value === '') {
-			start.disabled = true;
+			startBtn.disabled = true;
 		} else {
-			start.disabled = false;
+			startBtn.disabled = false;
 		}
 
 	});
 
-	start.addEventListener('click', appData.freezeMenu);
-	cancel.addEventListener('click', appData.resetMenu);
+	startBtn.addEventListener('click', appData.freezeMenu);
+	cancelBtn.addEventListener('click', appData.resetMenu);
 }
 const appData = new AppData();
 
