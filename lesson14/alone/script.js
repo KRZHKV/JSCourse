@@ -1,43 +1,46 @@
 'use strict';
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('.form');
-    const input = document.querySelector('.input-text');
-    const btn = document.querySelector('.form-button');
-    const body = document.querySelector('body');
 
-    
-    const DomElement = function() {
-    this.selector = 0;
-    this.height = '200px';
-    this.width = '100px';
-    this.bg = 'blue';
-    this.fontSize = '24px';
-    };
-DomElement.prototype.createBlock = function() {
-    if(this.input.value.indexOf('#') != -1) {
-        const item = document.createElement('p');
-        item.id = input.value;
-        item.style.cssText = `
-        background-color: ${bg};
-        height: ${height};
-        width: ${width};
-        fontsize: ${fontSize};`
-        body.appendChild(item);
-    } else if(this.input.value.indexOf('.') != -1) {
-        const item = document.createElement('div');
-        item.classList.add = input.value;
-        item.style.cssText = `
-        background-color: ${bg};
-        height: ${height};
-        width: ${width};
-        fontsize: ${fontSize};`
-        body.appendChild(item);
+function DomElement(selector, height, width, bg, fontSize) {
+    this.selector = selector;
+    this.height = height;
+    this.width = width;
+    this.bg = bg;
+    this.fontSize = fontSize;
+}
+
+DomElement.prototype.createElem = function () {
+    let elem;
+
+    if (this.selector[0] === '.') {
+        elem = document.createElement('div');
+        elem.classList.add(this.selector.slice(1));
     }
+
+    if (this.selector[0] === '#') {
+        elem = document.createElement('p');
+        elem.setAttribute('id', this.selector.slice(1));
+    }
+
+    this.styling(elem);
+    this.writeText(elem);
+    this.addElem(elem);
 };
 
-    const newBlock = new DomElement();
-console.log(newBlock);
+DomElement.prototype.styling = function (elem) {
+    elem.style.cssText = `height: ${this.height}; width: ${this.width}; background-color: ${this.bg}; font-size: ${this.fontSize}`;
+};
 
-form.addEventListener('submit', newBlock.createBlock);
-});
+DomElement.prototype.writeText = function (elem) {
+    elem.textContent = 'Lorem ipsum dolor sit amet!';
+};
 
+DomElement.prototype.addElem = function (elem) {
+    document.body.prepend(elem);
+};
+
+
+let div = new DomElement('.block', '185px', '103px', '#ccc', '2rem');
+let p = new DomElement('#block', '100px', '10rem', 'lavender', '10px');
+
+div.createElem();
+p.createElem();
