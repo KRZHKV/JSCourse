@@ -43,9 +43,7 @@ DomElement.prototype.addElem = function (elem) {
 };
 
 
-let div = new DomElement('.block', '185px', '103px', '#ccc', '2rem');
-let p = new DomElement('#block', '100px', '10rem', 'lavender', '10px');
+let newblock = new DomElement(textInput, '185px', '103px', '#ccc', '2rem');
 
+newblock.createElem();
 
-div.createElem();
-p.createElem();
