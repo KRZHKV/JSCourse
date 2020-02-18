@@ -28,7 +28,6 @@ let startBtn = document.getElementById('start'),
 
 
 
-
 function isNumber(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 }
@@ -61,7 +60,7 @@ AppData.prototype.start = function () {
 			alert('Ошибка, поле Месячный доход должно быть заполнено!');
 			return;
 		}
-		this.budget = salaryAmount.value;
+		this.budget = +salaryAmount.value;
 
 		this.getExpenses();
 		this.getIncome();
@@ -86,7 +85,6 @@ AppData.prototype.changePeriod = function () {
 	periodAmount.innerHTML = periodSelect.value;
 };
 AppData.prototype.addExpensesBlock = function () {
-	console.log(expensesItems.parentNode);
 	let cloneExpensesItem = expensesItems[0].cloneNode(true);
 	expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesAdd);
 	expensesItems = document.querySelectorAll('.expenses-items');
@@ -120,10 +118,17 @@ AppData.prototype.getIncome = function () {
 		let cashIncome = item.querySelector('.income-amount').value;
 		if (itemIncome !== '' && cashIncome !== '') {
 			this.income[itemIncome] = +cashIncome;
-			this.incomeMonth = +cashIncome;
 		}
 	}, this);
 };
+
+AppData.prototype.getIncomeMonth = function () {
+	for (let key in this.income) {
+		this.incomeMonth = +this.incomeMonth + +this.income[key];
+	}
+	return this.incomeMonth;
+};
+
 AppData.prototype.getAddExpenses = function () {
 	let addExpenses = expensesItem.value.split(',');
 	addExpenses.forEach(function (item) {
@@ -148,7 +153,7 @@ AppData.prototype.getExpensesMonth = function () {
 	return this.expensesMonth;
 };
 AppData.prototype.getBudget = function () {
-	this.budgetMonth = +this.budget + +this.incomeMonth - +this.expensesMonth;
+	this.budgetMonth = this.budget + this.getIncomeMonth() - this.expensesMonth;
 	this.budgetDay = parseInt(this.budgetMonth / 30);
 
 };
@@ -191,6 +196,19 @@ AppData.prototype.freezeMenu = function () {
 AppData.prototype.resetMenu = function () {
 	cancelBtn.style.display = 'none';
 	startBtn.style.display = 'block';
+	this.income = {};
+	this.addIncome = [];
+	this.incomeMonth = 0;
+	this.expenses = {};
+	this.addExpenses = [];
+	this.deposit = false;
+	this.percentDeposit = 0;
+	this.moneyDeposit = 0;
+	this.budget = 0;
+	this.budgetDay = 0;
+	this.budgetMonth = 0;
+	this.expensesMonth = 0;
+
 	let allInput = document.querySelectorAll('input[type=text]');
 	allInput.forEach(function (item) {
 		item.value = '';
