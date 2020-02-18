@@ -83,7 +83,8 @@ AppData.prototype.showResult = function () {
 	incomePeriodValue.value = this.calcSavedMoney();
 };
 AppData.prototype.changePeriod = function () {
-	periodAmount.innerHTML = periodSelect.value;
+	periodAmount.textContent = periodSelect.value;
+    incomePeriodValue.value = this.calcSavedMoney();
 };
 AppData.prototype.addExpensesBlock = function () {
 	let cloneExpensesItem = expensesItems[0].cloneNode(true);
@@ -197,18 +198,8 @@ AppData.prototype.freezeMenu = function () {
 AppData.prototype.resetMenu = function () {
 	cancelBtn.style.display = 'none';
 	startBtn.style.display = 'block';
-	this.income = {};
-	this.addIncome = [];
-	this.incomeMonth = 0;
-	this.expenses = {};
-	this.addExpenses = [];
-	this.deposit = false;
-	this.percentDeposit = 0;
-	this.moneyDeposit = 0;
-	this.budget = 0;
-	this.budgetDay = 0;
-	this.budgetMonth = 0;
-	this.expensesMonth = 0;
+	// сброс
+	Object.assign(this, new AppData)
 
 	let allInput = document.querySelectorAll('input[type=text]');
 	allInput.forEach(function (item) {
@@ -222,7 +213,7 @@ AppData.prototype.eventListeners = function () {
 	start.addEventListener('click', appData.start.bind(appData));
 	expensesAdd.addEventListener('click', appData.addExpensesBlock);
 	incomeAdd.addEventListener('click', appData.addIncomeBlock);
-	periodSelect.addEventListener('input', appData.changePeriod);
+	periodSelect.addEventListener('input', this.changePeriod.bind(this));
 	startBtn.disabled = true;
 
 	salaryAmount.addEventListener('input', function () {
@@ -235,7 +226,7 @@ AppData.prototype.eventListeners = function () {
 	});
 
 	startBtn.addEventListener('click', appData.freezeMenu);
-	cancelBtn.addEventListener('click', appData.resetMenu);
+	cancelBtn.addEventListener('click', this.resetMenu.bind(this));
 }
 const appData = new AppData();
 
