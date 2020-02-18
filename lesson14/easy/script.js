@@ -67,6 +67,7 @@ AppData.prototype.start = function () {
 		this.getExpensesMonth();
 		this.getAddExpenses();
 		this.getAddIncome();
+		this.getIncomeMonth();
 		this.getBudget();
 		this.calcSavedMoney();
 		this.showResult();
@@ -153,7 +154,7 @@ AppData.prototype.getExpensesMonth = function () {
 	return this.expensesMonth;
 };
 AppData.prototype.getBudget = function () {
-	this.budgetMonth = this.budget + this.getIncomeMonth() - this.expensesMonth;
+	this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
 	this.budgetDay = parseInt(this.budgetMonth / 30);
 
 };
