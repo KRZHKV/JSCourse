@@ -1,5 +1,9 @@
 'use strict';
 
+let textInput = prompt('Введите значение:', '.block');
+console.log(textInput);
+
+
 function DomElement(selector, height, width, bg, fontSize) {
     this.selector = selector;
     this.height = height;
@@ -10,7 +14,7 @@ function DomElement(selector, height, width, bg, fontSize) {
 
 DomElement.prototype.createElem = function () {
     let elem;
-
+    this.selector = textInput;
     if (this.selector[0] === '.') {
         elem = document.createElement('div');
         elem.classList.add(this.selector.slice(1));
@@ -31,7 +35,7 @@ DomElement.prototype.styling = function (elem) {
 };
 
 DomElement.prototype.writeText = function (elem) {
-    elem.textContent = 'Lorem ipsum dolor sit amet!';
+    elem.textContent = textInput;
 };
 
 DomElement.prototype.addElem = function (elem) {
@@ -41,6 +45,7 @@ DomElement.prototype.addElem = function (elem) {
 
 let div = new DomElement('.block', '185px', '103px', '#ccc', '2rem');
 let p = new DomElement('#block', '100px', '10rem', 'lavender', '10px');
+
 
 div.createElem();
 p.createElem();
