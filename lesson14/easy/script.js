@@ -210,9 +210,9 @@ AppData.prototype.resetMenu = function () {
 
 };
 AppData.prototype.eventListeners = function () {
-	start.addEventListener('click', appData.start.bind(appData));
-	expensesAdd.addEventListener('click', appData.addExpensesBlock);
-	incomeAdd.addEventListener('click', appData.addIncomeBlock);
+	start.addEventListener('click', this.start.bind(this));
+	expensesAdd.addEventListener('click', this.addExpensesBlock.bind(this));
+	incomeAdd.addEventListener('click', this.addIncomeBlock.bind(this));
 	periodSelect.addEventListener('input', this.changePeriod.bind(this));
 	startBtn.disabled = true;
 
