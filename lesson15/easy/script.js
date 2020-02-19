@@ -96,7 +96,7 @@ class AppData {
 
 		if (expensesItems.length === 3) {
 			expensesAdd.style.display = 'none';
-		}
+		} 
 	};
 
 	addIncomeBlock() {
@@ -106,6 +106,8 @@ class AppData {
 
 		if (incomeItems.length === 3) {
 			incomeAdd.style.display = 'none';
+		} else {
+			incomeAdd.style.display = 'block';
 		}
 	};
 
@@ -222,6 +224,16 @@ class AppData {
 			item.disabled = false;
 			start.disabled = true;
 		});
+		incomeItems.forEach(function (item, i) {
+			if (i > 0) {
+			  item.remove();
+			}
+		  });
+		 expensesItems.forEach(function (item, i) {
+			if (i > 0) {
+			  item.remove();
+			}
+		  });
 	};
 
 	eventListeners() {
