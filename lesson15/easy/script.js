@@ -106,8 +106,6 @@ class AppData {
 
 		if (incomeItems.length === 3) {
 			incomeAdd.style.display = 'none';
-		} else {
-			incomeAdd.style.display = 'block';
 		}
 	};
 
