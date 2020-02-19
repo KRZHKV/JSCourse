@@ -234,11 +234,7 @@ class AppData {
             }
             expensesAdd.style.display = 'block';
         };
-		 expensesItems.forEach(function (item, i) {
-			if (i > 0) {
-			  item.remove();
-			}
-		  });
+		  
 	};
 
 	eventListeners() {
