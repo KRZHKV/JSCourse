@@ -56,7 +56,7 @@ class AppData {
 		this.expensesMonth = 0;
 	}
 
-	start = () => {
+	start() {
 		if (salaryAmount.value === '') {
 			alert('Ошибка, поле Месячный доход должно быть заполнено!');
 			return;
@@ -74,7 +74,7 @@ class AppData {
 		this.showResult();
 	}
 
-	showResult = () => {
+	showResult() {
 		budgetMonthValue.value = this.budgetMonth;
 		budgetDayValue.value = this.budgetDay;
 		expensesMonthValue.value = this.expensesMonth;
@@ -84,12 +84,12 @@ class AppData {
 		incomePeriodValue.value = this.calcSavedMoney();
 	}
 
-	changePeriod = () => {
+	changePeriod() {
 		periodAmount.textContent = periodSelect.value;
 		incomePeriodValue.value = this.calcSavedMoney();
 	}
 
-	addExpensesBlock = () => {
+	addExpensesBlock() {
 		let cloneExpensesItem = expensesItems[0].cloneNode(true);
 		expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesAdd);
 		expensesItems = document.querySelectorAll('.expenses-items');
@@ -99,7 +99,7 @@ class AppData {
 		}
 	};
 
-	addIncomeBlock = () => {
+	addIncomeBlock() {
 		let cloneIncomeItem = incomeItems[0].cloneNode(true);
 		incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeAdd);
 		incomeItems = document.querySelectorAll('.income-items');
@@ -109,7 +109,7 @@ class AppData {
 		}
 	};
 
-	getExpenses = () => {
+	getExpenses() {
 		expensesItems.forEach( (item) => {
 			let itemExpenses = item.querySelector('.expenses-title').value;
 			let cashExpenses = item.querySelector('.expenses-amount').value;
@@ -119,7 +119,7 @@ class AppData {
 		}, this);
 	};
 
-	getIncome = () => {
+	getIncome() {
 
 		incomeItems.forEach( (item) => {
 			let itemIncome = item.querySelector('.income-title').value;
@@ -130,14 +130,14 @@ class AppData {
 		}, this);
 	};
 
-	getIncomeMonth = () => {
+	getIncomeMonth() {
 		for (let key in this.income) {
 			this.incomeMonth = +this.incomeMonth + +this.income[key];
 		}
 		return this.incomeMonth;
 	};
 
-	getAddExpenses = () => {
+	getAddExpenses() {
 		let addExpenses = expensesItem.value.split(',');
 		addExpenses.forEach( (item) => {
 			item = item.trim();
@@ -147,7 +147,7 @@ class AppData {
 		}, this);
 	};
 
-	getAddIncome = () => {
+	getAddIncome() {
 		incomeItem.forEach( (item) => {
 			let itemValue = item.value.trim();
 			if (itemValue !== '') {
@@ -156,25 +156,25 @@ class AppData {
 		}, this);
 	};
 
-	getExpensesMonth = () => {
+	getExpensesMonth() {
 		for (let key in this.expenses) {
 			this.expensesMonth = +this.expensesMonth + +this.expenses[key];
 		}
 		return this.expensesMonth;
 	};
 
-	getBudget = () => {
+	getBudget() {
 		this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
 		this.budgetDay = parseInt(this.budgetMonth / 30);
 
 	};
 
-	getTargetMonth = () => {
+	getTargetMonth() {
 		let sum = Math.round(targetAmount.value / this.budgetMonth);
 		return sum;
 	};
 
-	getStatusIncome = () => {
+	getStatusIncome() {
 		if (this.budgetDay > 1200) {
 			return ('У вас высокий уровень дохода');
 		} else if (this.budgetDay >= 600 && this.budgetDay <= 1200) {
@@ -186,7 +186,7 @@ class AppData {
 		}
 	};
 
-	getInfoDeposit = () => {
+	getInfoDeposit() {
 		if (this.deposit) {
 			do {
 				this.percentDeposit = prompt('Какой у вас годовой процент?', 10);
@@ -197,24 +197,24 @@ class AppData {
 		}
 	};
 
-	calcSavedMoney = () => {
+	calcSavedMoney() {
 		return this.budgetMonth * periodSelect.value;
 	};
 
-	freezeMenu = () => {
+	freezeMenu() {
 		startBtn.style.display = 'none';
 		cancelBtn.style.display = 'block';
-		const allInput = document.querySelectorAll('input[type=text]');
+		let allInput = document.querySelectorAll('input[type=text]');
 		allInput.forEach( (item) => {
 			item.disabled = true;
 		});
 	};
 
-	resetMenu = () => {
+	resetMenu() {
 		cancelBtn.style.display = 'none';
 		startBtn.style.display = 'block';
 		// сброс
-		Object.assign(this, new AppData)
+		Object.assign(this, new AppData);
 
 		const allInput = document.querySelectorAll('input[type=text]');
 		allInput.forEach(function (item) {
@@ -224,7 +224,7 @@ class AppData {
 		});
 	};
 
-	eventListeners = () => {
+	eventListeners() {
 		start.addEventListener('click', this.start.bind(this));
 		expensesAdd.addEventListener('click', this.addExpensesBlock.bind(this));
 		incomeAdd.addEventListener('click', this.addIncomeBlock.bind(this));
