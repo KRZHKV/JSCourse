@@ -224,11 +224,18 @@ class AppData {
 			item.disabled = false;
 			start.disabled = true;
 		});
-		incomeItems.forEach(function (item, i) {
-			if (i > 0) {
-			  item.remove();
-			}
-		  });
+		for (let i = 1; i < incomeItems.length; i++) {
+            if (i !== 0) {
+                incomeItems[i].parentNode.removeChild(incomeItems[i]);
+            }
+            incomeAdd.style.display = 'block';
+		};
+		for (let i = 1; i < expensesItems.length; i++) {
+            if (i !== 0) {
+                expensesItems[i].parentNode.removeChild(expensesItems[i]);
+            }
+            expensesAdd.style.display = 'block';
+        };
 		 expensesItems.forEach(function (item, i) {
 			if (i > 0) {
 			  item.remove();
