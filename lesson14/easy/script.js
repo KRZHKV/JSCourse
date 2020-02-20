@@ -82,9 +82,7 @@ AppData.prototype.showResult = function () {
 	targetMonthValue.value = this.getTargetMonth();
 	incomePeriodValue.value = this.calcSavedMoney();
 };
-AppData.prototype.changePeriod = function () {
-	periodAmount.innerHTML = periodSelect.value;
-};
+
 AppData.prototype.addExpensesBlock = function () {
 	console.log(expensesItems.parentNode);
 	let cloneExpensesItem = expensesItems[0].cloneNode(true);
@@ -180,30 +178,38 @@ AppData.prototype.getInfoDeposit = function () {
 AppData.prototype.calcSavedMoney = function () {
 	return this.budgetMonth * periodSelect.value;
 };
+AppData.prototype.changePeriod = function () {
+	periodAmount.innerHTML = periodSelect.value;
+	this.budgetMonth * periodSelect.value;
+};
 AppData.prototype.freezeMenu = function () {
 	startBtn.style.display = 'none';
 	cancelBtn.style.display = 'block';
 	let allInput = document.querySelectorAll('input[type=text]');
+	let inputMoney = document.querySelector('input[class=income_period-value]')
 	allInput.forEach(function (item) {
-		item.disabled = true;
+		item.disabled = true;	
 	});
+	inputMoney.disabled = false;
 };
 AppData.prototype.resetMenu = function () {
 	cancelBtn.style.display = 'none';
 	startBtn.style.display = 'block';
 	let allInput = document.querySelectorAll('input[type=text]');
+	periodAmount.innerHTML = '1';
+	periodSelect.value = '1';
 	allInput.forEach(function (item) {
 		item.value = '';
 		item.disabled = false;
-		start.disabled = true;
+		startBtn.disabled = true;
 	});
 
 };
 AppData.prototype.eventListeners = function () {
-	start.addEventListener('click', appData.start.bind(appData));
-	expensesAdd.addEventListener('click', appData.addExpensesBlock);
-	incomeAdd.addEventListener('click', appData.addIncomeBlock);
-	periodSelect.addEventListener('input', appData.changePeriod);
+	start.addEventListener('click', this.start.bind(appData));
+	expensesAdd.addEventListener('click', this.addExpensesBlock);
+	incomeAdd.addEventListener('click', this.addIncomeBlock);
+	periodSelect.addEventListener('input', this.changePeriod);
 	startBtn.disabled = true;
 
 	salaryAmount.addEventListener('input', function () {

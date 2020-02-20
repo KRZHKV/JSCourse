@@ -8,15 +8,13 @@ function DomElement(selector, height, width, bg, fontSize) {
     this.fontSize = fontSize;
 }
 
-DomElement.prototype.createElem = function () {
+DomElement.prototype.createBlock = function () {
     let elem;
-
+   
     if (this.selector[0] === '.') {
         elem = document.createElement('div');
         elem.classList.add(this.selector.slice(1));
-    }
-
-    if (this.selector[0] === '#') {
+    } else if (this.selector[0] === '#') {
         elem = document.createElement('p');
         elem.setAttribute('id', this.selector.slice(1));
     }
@@ -31,7 +29,7 @@ DomElement.prototype.styling = function (elem) {
 };
 
 DomElement.prototype.writeText = function (elem) {
-    elem.textContent = 'Lorem ipsum dolor sit amet!';
+    elem.textContent = prompt('Что за текст?', 'вот текст');
 };
 
 DomElement.prototype.addElem = function (elem) {
@@ -42,5 +40,6 @@ DomElement.prototype.addElem = function (elem) {
 let div = new DomElement('.block', '185px', '103px', '#ccc', '2rem');
 let p = new DomElement('#block', '100px', '10rem', 'lavender', '10px');
 
-div.createElem();
-p.createElem();
+
+div.createBlock();
+p.createBlock();
