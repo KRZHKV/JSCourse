@@ -18,7 +18,6 @@ const startBtn = document.getElementById('start'),
 	expensesTitle = document.querySelector('.expenses-title'),
 	expensesItem = document.querySelector('.additional_expenses-item'),
 	depositAmount = document.querySelector('.deposit-amount'),
-	depositPercent = document.querySelector('.deposit-percent'),
 	depositCheck = document.getElementById('deposit-check'),
 	depositBank = document.querySelector('.deposit-bank'),
 	targetAmount = document.querySelector('.target-amount'),
@@ -28,6 +27,8 @@ const startBtn = document.getElementById('start'),
 	
 let expensesItems = document.querySelectorAll('.expenses-items'),
 	incomeItems = document.querySelectorAll('.income-items');
+	depositPercent = document.querySelector('.deposit-percent');
+
 
 function isNumber(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
@@ -204,13 +205,14 @@ class AppData {
 		return this.budgetMonth * periodSelect.value;
 	};
 
-	checkDepositValue() {
-		if(this.percentDeposit > 100 || this.percentDeposit < 0 || !isNumber(this.percentDeposit)) {
+	heckDepositValue() {
+		if(!parseInt(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value >= 100) {
+			depositPercent.value = '';
+			start.disabled = true;
 			alert('Введите корректное значение в поле проценты');
-			this.resetMenu();
-			console.log('я очень работаю');
-		}
-		console.log('я работаю')
+	 	} else {
+			start.disabled = false;
+	 };
 	}
 
 	freezeMenu() {
@@ -283,6 +285,7 @@ class AppData {
 		expensesAdd.addEventListener('click', this.addExpensesBlock.bind(this));
 		incomeAdd.addEventListener('click', this.addIncomeBlock.bind(this));
 		periodSelect.addEventListener('input', this.changePeriod.bind(this));
+
 		startBtn.disabled = true;
 
 
@@ -297,8 +300,8 @@ class AppData {
 
 		startBtn.addEventListener('click', appData.freezeMenu);
 		cancelBtn.addEventListener('click', this.resetMenu.bind(this));
-
 		depositCheck.addEventListener('change', this.depositHandler.bind(this));
+		depositPercent.addEventListener('input', this.checkDepositValue);
 
 	}
 }
