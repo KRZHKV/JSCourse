@@ -73,7 +73,6 @@ class AppData {
 		this.getAddIncome();
 		this.getIncomeMonth();
 		this.getInfoDeposit();
-		this.checkDepositValue();
 		this.getBudget();
 		this.calcSavedMoney();
 		this.showResult();
@@ -205,16 +204,6 @@ class AppData {
 		return this.budgetMonth * periodSelect.value;
 	};
 
-	checkDepositValue() {
-		if(!parseInt(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value >= 100) {
-			depositPercent.value = '';
-			start.disabled = true;
-			alert('Введите корректное значение в поле проценты');
-	 	} else {
-			start.disabled = false;
-	 };
-	}
-
 	freezeMenu() {
 		
 		startBtn.style.display = 'none';
@@ -252,6 +241,7 @@ class AppData {
 		depositBank.style.display = 'none';
 		depositAmount.style.display = 'none';
 		depositPercent.style.display = 'none';
+		depositPercent.value = 0;
 		depositCheck.checked = false;
 		  
 	};
@@ -305,7 +295,15 @@ class AppData {
 		startBtn.addEventListener('click', appData.freezeMenu);
 		cancelBtn.addEventListener('click', this.resetMenu.bind(this));
 		depositCheck.addEventListener('change', this.depositHandler.bind(this));
-		depositPercent.addEventListener('input', this.checkDepositValue);
+		depositPercent.addEventListener('input', () => {
+			if(!parseInt(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value >= 100) {
+				depositPercent.value = '';
+				start.disabled = true;
+				alert('Введите корректное значение в поле проценты');
+			 } else {
+				start.disabled = false;
+		 }
+		})
 
 	}
 }
