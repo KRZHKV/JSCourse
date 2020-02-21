@@ -248,7 +248,11 @@ class AppData {
                 expensesItems[i].parentNode.removeChild(expensesItems[i]);
             }
             expensesAdd.style.display = 'block';
-        };
+		};
+		depositBank.style.display = 'none';
+		depositAmount.style.display = 'none';
+		depositPercent.style.display = 'none';
+		depositCheck.checked = false;
 		  
 	};
 	
