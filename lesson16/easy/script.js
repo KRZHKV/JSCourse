@@ -26,7 +26,7 @@ const startBtn = document.getElementById('start'),
 	cancelBtn = document.querySelector('#cancel');
 	
 let expensesItems = document.querySelectorAll('.expenses-items'),
-	incomeItems = document.querySelectorAll('.income-items');
+	incomeItems = document.querySelectorAll('.income-items'),
 	depositPercent = document.querySelector('.deposit-percent');
 
 
@@ -205,7 +205,7 @@ class AppData {
 		return this.budgetMonth * periodSelect.value;
 	};
 
-	heckDepositValue() {
+	checkDepositValue() {
 		if(!parseInt(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value >= 100) {
 			depositPercent.value = '';
 			start.disabled = true;
