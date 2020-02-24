@@ -1,5 +1,9 @@
 'use strict';
 
+let textInput = prompt('Введите значение:', '.block');
+console.log(textInput);
+
+
 function DomElement(selector, height, width, bg, fontSize) {
     this.selector = selector;
     this.height = height;
@@ -10,7 +14,11 @@ function DomElement(selector, height, width, bg, fontSize) {
 
 DomElement.prototype.createBlock = function () {
     let elem;
+<<<<<<< HEAD
    
+=======
+    this.selector = textInput;
+>>>>>>> 1edd191d5ba1d0bab7d030e323b42b7a140e1e92
     if (this.selector[0] === '.') {
         elem = document.createElement('div');
         elem.classList.add(this.selector.slice(1));
@@ -29,7 +37,11 @@ DomElement.prototype.styling = function (elem) {
 };
 
 DomElement.prototype.writeText = function (elem) {
+<<<<<<< HEAD
     elem.textContent = prompt('Что за текст?', 'вот текст');
+=======
+    elem.textContent = textInput;
+>>>>>>> 1edd191d5ba1d0bab7d030e323b42b7a140e1e92
 };
 
 DomElement.prototype.addElem = function (elem) {
@@ -37,9 +49,13 @@ DomElement.prototype.addElem = function (elem) {
 };
 
 
-let div = new DomElement('.block', '185px', '103px', '#ccc', '2rem');
-let p = new DomElement('#block', '100px', '10rem', 'lavender', '10px');
+let newblock = new DomElement(textInput, '185px', '103px', '#ccc', '2rem');
 
+newblock.createElem();
+
+<<<<<<< HEAD
 
 div.createBlock();
 p.createBlock();
+=======
+>>>>>>> 1edd191d5ba1d0bab7d030e323b42b7a140e1e92
