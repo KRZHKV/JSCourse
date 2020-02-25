@@ -91,10 +91,10 @@ window.addEventListener('DOMContentLoaded', function() {
                     let timer = setInterval(function() {
                         let timePassed = Date.now() - start;
                         popup.style.display = 'block';
-                        popupContent.style.transform = `translateX(${(timePassed / 35)}px)`;
+                        popupContent.style.left = `${timePassed / 1.3}px`;
 
-                        if (timePassed > 500) clearInterval(timer);
-                }, 50);
+                        if (timePassed > 700) clearInterval(timer);
+                }, 10);
                 } else {
                     popup.style.display = `block`;
                 }
