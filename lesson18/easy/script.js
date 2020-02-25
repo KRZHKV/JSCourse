@@ -83,25 +83,37 @@ window.addEventListener('DOMContentLoaded', function() {
         const popupContent = document.querySelector('.popup-content');
         
         
-        popupBtn.forEach((elem) => {
-            elem.addEventListener('click', () => {
-                if (window.innerWidth > 768) {
-                    let start = Date.now();
-
-                    let timer = setInterval(function() {
-                        let timePassed = Date.now() - start;
-                        popup.style.display = 'block';
-                        popupContent.style.left = `${timePassed / 1.3}px`;
-
-                        if (timePassed > 700) clearInterval(timer);
-                }, 10);
+        const showPopup = () => {
+            popup.style.display = 'block'; // показать попап
+            if (window.innerWidth > 768) { // если ширина экрана больше заданного числа, то запустить анимацию
+                let start = Date.now(); // получить стартовое время анимации (в момент клика)
+                let timer = setInterval(() => {
+                    let timePassed = Date.now() - start; // запуск таймера, отнять от текущего реального времени стартовое время, после клика
+                    if (timePassed >= 800) {
+                    clearInterval(timer); // если время достигло определенного числа удалить setInterval 
+                    return;
+                    }
+                    draw(timePassed); // отрисовка анимации 
+                });
+                let draw = (timePassed) => {
+                    let wContent = +getComputedStyle(popupContent).width.split('px')[0]; // получить стили попап контента (блок с самой формой, а не вся обёртка, с попап )
+                    wContent = -wContent / 2 + 50 + 'px'; // данные для центрирования по горизонтали
+                    popupContent.style.left = timePassed / 16 + '%'; // центрирование по горизонтали
+                    popupContent.style.marginLeft = wContent; // центрирование по горизонтали
+                    };
                 } else {
-                    popup.style.display = `block`;
+                    popup.style.left = '49.875%';
+                    popup.style.margin = '-150px';
                 }
-                
-            });
+            };
+
+
+        popupBtn.forEach((elem) => {
+            elem.addEventListener('click', showPopup);
+    
         });
         
+
         popupBtnClose.addEventListener('click', () => {
             popup.style.display = `none`;
         })
