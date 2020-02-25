@@ -80,24 +80,30 @@ window.addEventListener('DOMContentLoaded', function() {
         const popup = document.querySelector('.popup');
         const popupBtn = document.querySelectorAll('.popup-btn');
         const popupBtnClose = document.querySelector('.popup-close');
-        popup.style.display = `block`;
-        popup.style.transform = `translateX(-100%)`;
+        const popupContent = document.querySelector('.popup-content');
+        
         
         popupBtn.forEach((elem) => {
             elem.addEventListener('click', () => {
-                let start = Date.now();
+                if (window.innerWidth > 768) {
+                    let start = Date.now();
 
-                let timer = setInterval(function() {
-                    let timePassed = Date.now() - start;
-                    popup.style.transform = `translateX(${timePassed / 60}%)`;
+                    let timer = setInterval(function() {
+                        let timePassed = Date.now() - start;
+                        popup.style.display = 'block';
+                        popupContent.style.transform = `translateX(${(timePassed / 35)}px)`;
 
-                    if (timePassed > 1000) clearInterval(timer);
-                }, 30);
+                        if (timePassed > 500) clearInterval(timer);
+                }, 50);
+                } else {
+                    popup.style.display = `block`;
+                }
+                
             });
         });
         
         popupBtnClose.addEventListener('click', () => {
-            popup.style.transform = `translateX(-100%)`;
+            popup.style.display = `none`;
         })
 
     }
