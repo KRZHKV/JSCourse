@@ -63,9 +63,17 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
 
                 btnMenu.addEventListener('click', handlerMenu);
-                btnClose.addEventListener('click', handlerMenu);
-
-                menuItem.forEach((elem) => elem.addEventListener('click', handlerMenu));
+                menu.addEventListener('click', (event) => {
+                    let target = event.target;
+                    if (target.classList.contains('close-btn')) {
+                        handlerMenu();
+                    } else {
+                        target = target.closest('li');
+                        if (!target) {
+                            handlerMenu;
+                        }
+                    }
+                })
 
             }
 
