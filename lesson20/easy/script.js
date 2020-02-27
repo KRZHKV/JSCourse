@@ -186,12 +186,14 @@ window.addEventListener('DOMContentLoaded', function () {
                     let currentSlide = 0,
                         interval;
                     
-                    function slideDotAdd() {
-                        let cloneDot = dot.cloneNode();
-                        for (let i = 0; i < slide.length; i++) {
-                              dotWrapper.appendChild(cloneDot);
-                            };
-                        }
+                    const slideDotAdd  = () => {
+                        slide.forEach((elem, index) => {
+                            elem[index] = document.createElement('li');
+                            elem[index].classList.add('dot');
+                            dotWrapper[0].appendChild(elem[index]);
+                        });
+                              
+                        };
                     slideDotAdd();
                     const prevSlide = (elem, index, strClass) => {
                         elem[index].classList.remove(strClass);
