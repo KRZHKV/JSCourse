@@ -180,8 +180,6 @@ window.addEventListener('DOMContentLoaded', function () {
                           slider = document.querySelector('.portfolio-content'),
                           dotWrapper = document.querySelector('.portfolio-dots');
 
-                    let dot = document.createElement('li');
-                    dot.classList.add('dot');
 
                     let currentSlide = 0,
                         interval;
