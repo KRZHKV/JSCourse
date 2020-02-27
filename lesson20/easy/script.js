@@ -176,27 +176,30 @@ window.addEventListener('DOMContentLoaded', function () {
                 const slider = () => {
                     const slide = document.querySelectorAll('.portfolio-item'),
                           btn = document.querySelectorAll('.portfolio-btn'),
-                        //   dot = document.querySelectorAll('.dot'),
                           slider = document.querySelector('.portfolio-content'),
                           dotWrapper = document.querySelector('.portfolio-dots');
 
 
                     let currentSlide = 0,
                         interval;
-                    
+                    //динамическое добавление слайдов
                     const slideDotAdd  = () => {
                         slide.forEach((elem, index) => {
                             elem[index] = document.createElement('li');
                             elem[index].classList.add('dot');
-                            dotWrapper[0].appendChild(elem[index]);
+                            dotWrapper.appendChild(elem[index]);
                         });
                               
                         };
                     slideDotAdd();
+
+                    let dot = document.querySelectorAll('.dot');
+
+                    //предыдущий слайд
                     const prevSlide = (elem, index, strClass) => {
                         elem[index].classList.remove(strClass);
                     };
-
+                    //следующий слайд
                     const nextSlide = (elem, index, strClass) => {
                         elem[index].classList.add(strClass);
                     };
