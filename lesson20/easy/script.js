@@ -187,6 +187,9 @@ window.addEventListener('DOMContentLoaded', function () {
                         slide.forEach((elem, index) => {
                             elem[index] = document.createElement('li');
                             elem[index].classList.add('dot');
+                            if (elem[index] === elem[0]) {
+                                elem[0].classList.add('dot-active');
+                            }
                             dotWrapper.appendChild(elem[index]);
                         });
                               
