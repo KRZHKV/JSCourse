@@ -176,34 +176,23 @@ window.addEventListener('DOMContentLoaded', function () {
                 const slider = () => {
                     const slide = document.querySelectorAll('.portfolio-item'),
                           btn = document.querySelectorAll('.portfolio-btn'),
-                          dot = document.querySelectorAll('.dot'),
+                        //   dot = document.querySelectorAll('.dot'),
                           slider = document.querySelector('.portfolio-content'),
-                          dots = document.querySelector('.portfolio-dots');
+                          dotWrapper = document.querySelector('.portfolio-dots');
 
+                    let dot = document.createElement('li');
+                    dot.classList.add('dot');
 
                     let currentSlide = 0,
                         interval;
                     
-                    const createDots = () => {
-                        const newDot = document.createElement('li');
-                        newDot.classList.add('dot');
-                        dots.appendChild(newDot);
-                        dots.appendChild(newDot);
-                        dots.appendChild(newDot);
-                        dots.appendChild(newDot);
-                        dots.appendChild(newDot);
-                        dots.appendChild(newDot);
-
-                    }
-                    const createDotsActive = () => {
-                        const newDot = document.createElement('li');
-                        newDot.classList.add('dot');
-                        newDot.classList.add('dot-active');
-                        dots.appendChild(newDot);
-
-                    }
-                    createDotsActive();
-                    createDots();
+                    function slideDotAdd() {
+                        let cloneDot = dot.cloneNode();
+                        for (let i = 0; i < slide.length; i++) {
+                              dotWrapper.appendChild(cloneDot);
+                            };
+                        }
+                    slideDotAdd();
                     const prevSlide = (elem, index, strClass) => {
                         elem[index].classList.remove(strClass);
                     };
