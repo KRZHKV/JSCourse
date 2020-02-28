@@ -298,14 +298,15 @@ window.addEventListener('DOMContentLoaded', function () {
                 changePhoto();
 
                 const checkNumber = () => {
-                    const calcInputs = document.querySelectorAll('.calc-item');
-                    for( let i = 1; i < calcInputs.length; i++) {
-                        calcInputs[i].addEventListener('input', () => {
-                            calcInputs[i].textContent.replace(/\D/g, '');
-                        })
-                    }
+                    const calcItem = document.querySelector('.calc-item');
+                    calcItem.addEventListener('input', (event) => {
+                        let target = event.target;
+                        if (target.classList.contains('calc-item') && target.tagName !== 'SELECT') {
+                            target.value = target.value.replace(/\D/g, '');
+                        }
+                    });
                     
-                }
+                };
 
                 checkNumber();
 
