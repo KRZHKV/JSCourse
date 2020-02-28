@@ -280,22 +280,18 @@ window.addEventListener('DOMContentLoaded', function () {
                 slider();
 
                 const changePhoto = () => {
-                    let photo = document.querySelectorAll('.command__photo');
-                    photo.forEach( (e) => {
-
-                        e.addEventListener('mouseenter', (event) => {
-                            const photo = event.target.src;
-                            console.log(photo);
+                    let command = document.querySelector('.command');
+                    command.addEventListener('mouseover', (event) => {
+                        const oldPhoto = event.target.src;
+                        if(event.target.classList.contains('command__photo')) {
                             event.target.src = event.target.dataset.img;
-                            event.target.dataset.img = photo;
-                            e.addEventListener('mouseout', (event) => {
-                                const photo = event.target.src;
-                                event.target.src = event.target.dataset.img;
-                                event.target.dataset.img = photo;
-                            })
+                        } 
+                        command.addEventListener('mouseout', (event) => {
+                            if(event.target.classList.contains('command__photo')) {
+                                event.target.src = oldPhoto;
+                            } 
                         })
-                        
-                        });
+                    })
                     
                     
                 }
@@ -305,7 +301,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     const calcInputs = document.querySelectorAll('.calc-item');
                     for( let i = 1; i < calcInputs.length; i++) {
                         calcInputs[i].addEventListener('input', () => {
-                            calcInputs[i].value.replace(/\D/g, '');
+                            calcInputs[i].textContent.replace(/\D/g, '');
                         })
                     }
                     
