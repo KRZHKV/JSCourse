@@ -400,6 +400,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 event.preventDefault();
                 elem.appendChild(statusMessage);
                 statusMessage.textContent = loadMessage;
+                loadMessage.style.cssText = 'color: #ffffff;';
                 const formData = new FormData(elem);
                 let body = {};
                 let formValues = elem.querySelectorAll('input');
