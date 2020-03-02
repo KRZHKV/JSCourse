@@ -79,13 +79,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
     toggleMenu();
 
-
     const togglePopUp = () => {
         const popup = document.querySelector('.popup');
         const popupBtn = document.querySelectorAll('.popup-btn');
         const popupBtnClose = document.querySelector('.popup-close');
         const popupContent = document.querySelector('.popup-content');
-
 
         const showPopup = () => {
             popup.style.display = 'block'; // показать попап
@@ -96,7 +94,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     if (timePassed >= 800) {
                         clearInterval(timer); // если время достигло определенного числа удалить setInterval 
                         return;
-                    }
+                    };
                     draw(timePassed); // отрисовка анимации 
                 });
                 let draw = (timePassed) => {
@@ -108,14 +106,13 @@ window.addEventListener('DOMContentLoaded', function () {
             } else {
                 popupContent.style.left = '49.875%';
                 popupContent.style.margin = '-150px';
-            }
+            };
         };
 
         popupBtn.forEach((elem) => {
             elem.addEventListener('click', showPopup);
 
         });
-
 
         popup.addEventListener('click', (event) => {
             let target = event.target;
@@ -125,11 +122,11 @@ window.addEventListener('DOMContentLoaded', function () {
                 target = target.closest('.popup-content');
                 if (!target) {
                     popup.style.display = 'none';
-                }
-            }
+                };
+            };
 
-        })
-    }
+        });
+    };
 
     togglePopUp();
 
@@ -148,9 +145,9 @@ window.addEventListener('DOMContentLoaded', function () {
                 } else {
                     tab[i].classList.remove('active');
                     tabContent[i].classList.add('d-none');
-                }
-            }
-        }
+                };
+            };
+        };
 
         tabHeader.addEventListener('click', (event) => {
             let target = event.target;
@@ -160,15 +157,15 @@ window.addEventListener('DOMContentLoaded', function () {
                 tab.forEach((item, i) => {
                     if (item === target) {
                         toggleTab(i);
-                    }
+                    };
                 });
 
-            }
-        })
+            };
+        });
 
 
 
-    }
+    };
     tabs();
 
     //Слайдер
@@ -213,7 +210,7 @@ window.addEventListener('DOMContentLoaded', function () {
             currentSlide++;
             if (currentSlide >= slide.length) {
                 currentSlide = 0;
-            }
+            };
             nextSlide(slide, currentSlide, 'portfolio-item-active');
             nextSlide(dot, currentSlide, 'dot-active');
         };
@@ -225,7 +222,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         const stopSlide = () => {
             clearInterval(interval);
-        }
+        };
 
         slider.addEventListener('click', (event) => {
             event.preventDefault();
@@ -234,7 +231,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
             if (!target.matches('.portfolio-btn, .dot')) {
                 return;
-            }
+            };
 
             prevSlide(slide, currentSlide, 'portfolio-item-active');
             prevSlide(dot, currentSlide, 'dot-active');
@@ -247,15 +244,15 @@ window.addEventListener('DOMContentLoaded', function () {
                 dot.forEach((elem, index) => {
                     if (elem === target) {
                         currentSlide = index;
-                    }
+                    };
                 });
-            }
+            };
             if (currentSlide >= slide.length) {
                 currentSlide = 0;
-            }
+            };
             if (currentSlide < 0) {
                 currentSlide = slide.length - 1;
-            }
+            };
             nextSlide(slide, currentSlide, 'portfolio-item-active');
             nextSlide(dot, currentSlide, 'dot-active');
         });
@@ -263,14 +260,14 @@ window.addEventListener('DOMContentLoaded', function () {
         slider.addEventListener('mouseover', (event) => {
             if (event.target.matches('.portfolio-btn') || event.target.matches('.dot')) {
                 stopSlide();
-            }
+            };
         });
 
         slider.addEventListener('mouseout', (event) => {
             if (event.target.matches('.portfolio-btn') || event.target.matches('.dot')) {
                 startSlide();
-            }
-        })
+            };
+        });
 
 
         startSlide(1500);
@@ -289,9 +286,9 @@ window.addEventListener('DOMContentLoaded', function () {
             command.addEventListener('mouseout', (event) => {
                 if (event.target.classList.contains('command__photo')) {
                     event.target.src = oldPhoto;
-                }
-            })
-        })
+                };
+            });
+        });
 
 
     }
@@ -303,7 +300,7 @@ window.addEventListener('DOMContentLoaded', function () {
             let target = event.target;
             if (target.classList.contains('calc-item') && target.tagName !== 'SELECT') {
                 target.value = target.value.replace(/\D/g, '');
-            }
+            };
         });
 
     };
@@ -330,17 +327,17 @@ window.addEventListener('DOMContentLoaded', function () {
 
             if (calcCount.value > 1) {
                 countValue += (calcCount.value - 1) / 10;
-            }
+            };
 
             if (calcDay.value && calcDay.value < 5) {
                 dayValue *= 2;
             } else if (calcDay.value && calcDay.value < 10) {
                 dayValue *= 1.5;
-            }
+            };
 
             if (typeValue && squareValue) {
                 total = Math.floor(price * typeValue * squareValue * countValue * dayValue);
-            }
+            };
 
             totalValue.textContent = total;
 
@@ -357,8 +354,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
             if (target === calcType || target === calcSquare || target === calcDay || target === calcCount) {
                 countSum();
-            }
-        })
+            };
+        });
 
     };
 
@@ -374,7 +371,7 @@ window.addEventListener('DOMContentLoaded', function () {
         const forms = document.querySelectorAll('form');
 
         const statusMessage = document.createElement('div');
-        statusMessage.style.cssText = 'font-size: 2rem';
+        statusMessage.style.cssText = 'font-size: 2rem; color: #ffffff';
 
 
         const inputPhone = document.querySelectorAll('input[type=tel]'),
@@ -413,17 +410,19 @@ window.addEventListener('DOMContentLoaded', function () {
                 postData(body,
                     () => {
                         statusMessage.textContent = successMessage;
+                        statusMessage.style.cssText = 'color: green;';
                     },
                     (error) => {
                         statusMessage.textContent = errorMessage;
+                        statusMessage.style.cssText = 'color: red;';
                         console.error(error);
                     });
                     for( let i = 0; i < formValues.length; i++) {
                         formValues[i].value = '';
-                    }
+                    };
             });
             
-        })
+        });
 
         const postData = (body, outputData, errorData) => {
             const request = new XMLHttpRequest();
