@@ -375,6 +375,8 @@ window.addEventListener('DOMContentLoaded', function () {
         const modalForm = document.getElementById('form3');
         const footerForm = document.getElementById('form2');
 
+        const forms = document.querySelectorAll('form');
+
         const statusMessage = document.createElement('div');
         statusMessage.style.cssText = 'font-size: 2rem';
 
@@ -400,82 +402,32 @@ window.addEventListener('DOMContentLoaded', function () {
             });
     
         
-        
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            form.appendChild(statusMessage);
-            statusMessage.textContent = loadMessage;
-            const formData = new FormData(form);
-            let body = {};
-            let formValues = form.querySelectorAll('input');
-
-            formData.forEach((value, key) => {
-                body[key] = value;
-            });
-            postData(body,
-                () => {
-                    statusMessage.textContent = successMessage;
-                },
-                (error) => {
-                    statusMessage.textContent = errorMessage;
-                    console.error(error);
+        forms.forEach((elem) => {
+            elem.addEventListener('submit', (event) => {
+                event.preventDefault();
+                elem.appendChild(statusMessage);
+                statusMessage.textContent = loadMessage;
+                const formData = new FormData(elem);
+                let body = {};
+                let formValues = elem.querySelectorAll('input');
+    
+                formData.forEach((value, key) => {
+                    body[key] = value;
                 });
-                for( let i = 0; i < formValues.length; i++) {
-                    formValues[i].value = '';
-                }
-        });
-
-        modalForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            modalForm.appendChild(statusMessage);
-            statusMessage.textContent = loadMessage;
-            const formData = new FormData(modalForm);
-            let body = {};
-            let formValues = modalForm.querySelectorAll('input');
-
-            formData.forEach((value, key) => {
-                body[key] = value;
+                postData(body,
+                    () => {
+                        statusMessage.textContent = successMessage;
+                    },
+                    (error) => {
+                        statusMessage.textContent = errorMessage;
+                        console.error(error);
+                    });
+                    for( let i = 0; i < formValues.length; i++) {
+                        formValues[i].value = '';
+                    }
             });
-            postData(body,
-                () => {
-                    const popup = document.querySelector('.popup');
-                    popup.style.display = 'none';
-                },
-                (error) => {
-                    statusMessage.textContent = errorMessage;
-                    console.error(error);
-                });
-                for( let i = 0; i < formValues.length; i++) {
-                    formValues[i].value = '';
-                    
-                }
-            });
-
-        footerForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            footerForm.appendChild(statusMessage);
-            statusMessage.textContent = loadMessage;
-            const formData = new FormData(footerForm);
-            let body = {};
-            let formValues = footerForm.querySelectorAll('input');
-
-            formData.forEach((value, key) => {
-                body[key] = value;
-            });
-            postData(body,
-                () => {
-                    statusMessage.textContent = successMessage;
-                },
-                (error) => {
-                    statusMessage.textContent = errorMessage;
-                    console.error(error);
-                });
-                for( let i = 0; i < formValues.length; i++) {
-                    formValues[i].value = '';
-                }
-        });
-      
+            
+        })
 
         const postData = (body, outputData, errorData) => {
             const request = new XMLHttpRequest();
