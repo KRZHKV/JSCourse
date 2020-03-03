@@ -424,7 +424,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
         });
 
-            const postData = new Promise((body, resolve, reject) => {
+        const postData = (body) => {
+            return new Promise((resolve, reject) => {
                 const request = new XMLHttpRequest();
                 request.addEventListener('readystatechange', () => {
                     if (request.readyState !== 4) {
@@ -433,13 +434,16 @@ window.addEventListener('DOMContentLoaded', function () {
                     if (request.status === 200) {
                         resolve();
                     } else {
-                        reject(error);
+                        reject(request.status);
                     };
                 });
                 request.open('POST', './server.php');
                 request.setRequestHeader('Content-Type', 'application/json');
                 request.send(JSON.stringify(body));
             });
+
+
+        };
 
     };
 
