@@ -6,7 +6,6 @@ window.addEventListener('DOMContentLoaded', function () {
             timerMinutes = document.querySelector('#timer-minutes'),
             timerSeconds = document.querySelector('#timer-seconds');
 
-
         function getTimeRemaining() {
             let dateStop = new Date(deadline).getTime(),
                 dateNow = new Date().getTime(),
@@ -375,8 +374,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
         const inputPhone = document.querySelectorAll('input[type=tel]'),
-              inputName =document.querySelectorAll('input[type=text]'),
-              inputText = document.querySelector('input[class=mess]');
+            inputName = document.querySelectorAll('input[type=text]'),
+            inputText = document.querySelector('input[class=mess]');
 
         inputPhone.forEach((elem) => {
             elem.addEventListener('input', () => {
@@ -391,20 +390,20 @@ window.addEventListener('DOMContentLoaded', function () {
         });
 
         inputText.addEventListener('input', () => {
-                inputText.value = inputText.value.replace(/[^А-я]/, '');
-            });
-    
-        
+            inputText.value = inputText.value.replace(/[^А-я]/, '');
+        });
+
+
         forms.forEach((elem) => {
             elem.addEventListener('submit', (event) => {
                 event.preventDefault();
                 elem.appendChild(statusMessage);
                 statusMessage.textContent = loadMessage;
-                loadMessage.style.cssText = 'color: #ffffff;';
+                statusMessage.style.cssText = 'color: #ffffff;';
                 const formData = new FormData(elem);
                 let body = {};
                 let formValues = elem.querySelectorAll('input');
-    
+
                 formData.forEach((value, key) => {
                     body[key] = value;
                 });
@@ -418,31 +417,29 @@ window.addEventListener('DOMContentLoaded', function () {
                         statusMessage.style.cssText = 'color: red;';
                         console.error(error);
                     });
-                    for( let i = 0; i < formValues.length; i++) {
-                        formValues[i].value = '';
-                    };
-            });
-            
-        });
-
-        const postData = (body, outputData, errorData) => {
-            const request = new XMLHttpRequest();
-
-            request.addEventListener('readystatechange', () => {
-                if (request.readyState !== 4) {
-                    return;
-                }
-                if (request.status === 200) {
-                    outputData();
-                } else {
-                    errorData(request.status);
+                for (let i = 0; i < formValues.length; i++) {
+                    formValues[i].value = '';
                 };
             });
-            request.open('POST', './server.php');
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.send(JSON.stringify(body));
 
-        };
+        });
+
+            const postData = new Promise((body, resolve, reject) => {
+                const request = new XMLHttpRequest();
+                request.addEventListener('readystatechange', () => {
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+                    if (request.status === 200) {
+                        resolve();
+                    } else {
+                        reject(error);
+                    };
+                });
+                request.open('POST', './server.php');
+                request.setRequestHeader('Content-Type', 'application/json');
+                request.send(JSON.stringify(body));
+            });
 
     };
 
