@@ -407,16 +407,17 @@ window.addEventListener('DOMContentLoaded', function () {
                 formData.forEach((value, key) => {
                     body[key] = value;
                 });
-                postData(body,
-                    () => {
-                        statusMessage.textContent = successMessage;
-                        statusMessage.style.cssText = 'color: green;';
-                    },
-                    (error) => {
-                        statusMessage.textContent = errorMessage;
-                        statusMessage.style.cssText = 'color: red;';
-                        console.error(error);
-                    });
+                postData(body)
+                .then(() => {
+                    statusMessage.textContent = successMessage;
+                    statusMessage.style.cssText = 'color: green;';
+                })
+                .catch((error) => {
+                    statusMessage.textContent = errorMessage;
+                    statusMessage.style.cssText = 'color: red;';
+                    console.error(error);
+                });
+                    
                 for (let i = 0; i < formValues.length; i++) {
                     formValues[i].value = '';
                 };
@@ -441,7 +442,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 request.setRequestHeader('Content-Type', 'application/json');
                 request.send(JSON.stringify(body));
             });
-
 
         };
 
