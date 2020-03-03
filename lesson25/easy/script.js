@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded', function () {
             timerMinutes = document.querySelector('#timer-minutes'),
             timerSeconds = document.querySelector('#timer-seconds');
 
+
         function getTimeRemaining() {
             let dateStop = new Date(deadline).getTime(),
                 dateNow = new Date().getTime(),
@@ -399,7 +400,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 event.preventDefault();
                 elem.appendChild(statusMessage);
                 statusMessage.textContent = loadMessage;
-                statusMessage.style.cssText = 'color: #ffffff;';
+                loadMessage.style.cssText = 'color: #ffffff;';
                 const formData = new FormData(elem);
                 let body = {};
                 let formValues = elem.querySelectorAll('input');
