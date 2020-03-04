@@ -276,21 +276,17 @@ window.addEventListener('DOMContentLoaded', function () {
     slider();
 
     const changePhoto = () => {
-        let command = document.querySelector('.command');
-        command.addEventListener('mouseover', (event) => {
-            const oldPhoto = event.target.src;
-            if (event.target.classList.contains('command__photo')) {
-                event.target.src = event.target.dataset.img;
-            }
-            command.addEventListener('mouseout', (event) => {
-                if (event.target.classList.contains('command__photo')) {
-                    event.target.src = oldPhoto;
-                };
-            });
-        });
-
-
-    }
+        const toggleImg = (event) => {
+            const target = event.target;
+      
+            if (!target.matches('img')) return;
+      
+            [target.dataset.img, target.src] = [target.src, target.dataset.img];
+          };
+      
+          command.addEventListener('mouseover', toggleImg);
+          command.addEventListener('mouseout', toggleImg);
+    };
     changePhoto();
 
     const checkNumber = () => {
