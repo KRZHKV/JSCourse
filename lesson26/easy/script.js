@@ -369,7 +369,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         const forms = document.querySelectorAll('form');
 
-        const statusMessage = document.createElement('div');
+        let statusMessage = document.createElement('div');
         statusMessage.style.cssText = 'font-size: 2rem; color: #ffffff';
 
 
@@ -415,16 +415,24 @@ window.addEventListener('DOMContentLoaded', function () {
                     console.log(response);
                     statusMessage.textContent = successMessage;
                     statusMessage.style.cssText = 'color: green;';
+                    for (let i = 0; i < formValues.length; i++) {
+                        formValues[i].value = '';
+                    };
+                    setTimeout(clearInput, 3000);
                 })
                 .catch((error) => {
                     statusMessage.textContent = errorMessage;
                     statusMessage.style.cssText = 'color: red;';
                     console.error(error);
-                });
+                    setTimeout(clearInput, 3000);
+
                     
-                for (let i = 0; i < formValues.length; i++) {
-                    formValues[i].value = '';
-                };
+                });
+                const clearInput = () => {
+                    statusMessage.textContent = '';
+                }
+                    
+                
             });
 
         });
