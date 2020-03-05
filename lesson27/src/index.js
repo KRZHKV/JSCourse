@@ -11,7 +11,7 @@
     import calc from './modules/calc';
     import sendForm from './modules/sendForm';
 
-    countTimer('02 march 2020');
+    countTimer('12 march 2020');
 
     //меню
     toggleMenu();
