@@ -2,7 +2,7 @@ const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
         menu = document.querySelector('menu'),
         btnClose = document.querySelector('.close-btn'),
-        menuItem = menu.querySelectorAll('ul>li');
+        menuItem = menu.querySelectorAll('ul>li>a');
 
     const handlerMenu = () => {
         menu.classList.toggle('active-menu');
@@ -14,10 +14,12 @@ const toggleMenu = () => {
         if (target.classList.contains('close-btn')) {
             handlerMenu();
         } else {
-            target = target.closest('li');
-            if (!target) {
-                handlerMenu;
-            };
+            menuItem.forEach((elem) => {
+                if( elem === target ) {
+                handlerMenu();
+                };
+            });
+            
         };
     });
 
