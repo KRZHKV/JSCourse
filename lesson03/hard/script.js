@@ -1,37 +1,40 @@
 'use strict';
 
+//1 задание
 let lang = prompt('Выберете язык: ru/en');
+const arrayRu = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+const arrayEn = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const body = document.querySelector('body');
 
-// Вариант A
-if (lang == 'ru') {
-	console.log('Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье');
-} else if (lang == 'en') {
-	console.log('Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday');
-} else {
-	console.log('Ошибка/Error');
-}
-
-// Вариант B
-switch(lang) {
-	case 'ru':
-		console.log('Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье');
-		break;
-	case 'en':
-		console.log('Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday');
-		break;
-	default:
-		console.log('Ошибка/Error');
-		break;
-}
-
-//Вариант C
-let language = {
-	'ru': ['Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье'],
-	'en': ['Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday']
-}
-let choose = prompt('Выберете язык: ru/en');
+// Вариант a
+// if (lang === 'ru') {
+// 	toString(arrayRu);
+// 	body.innerHTML = 'Дни недели: ' + arrayRu;
+// } else if (lang === 'en') {
+// 	toString(arrayEn);
+// 	body.innerHTML = 'Дни недели: ' + arrayEn;
+// } else {
+// 	body.innerHTML = 'Ошибка';
+// }
 
 
+//Вариант b
+// switch(lang) {
+// 	case 'ru': toString(arrayRu);
+// 			   body.innerHTML = 'Дни недели: ' + arrayRu;
+// 	break;
+// 	case 'en': toString(arrayEn);
+// 			   body.innerHTML = 'Дни недели: ' + arrayEn;
+// 	break;
+// 	default: body.innerHTML = 'Ошибка';
+// }
+
+
+// Вариант c
+const mainArray = [];
+mainArray['ru'] = arrayRu;
+mainArray['en'] = arrayEn
+body.innerHTML = `Неделя: ${mainArray[lang]}`;
 
 //2 задание
 let namePerson = prompt('Ваше имя?');
