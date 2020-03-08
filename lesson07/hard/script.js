@@ -1,16 +1,21 @@
 'use strict';
 let body = document.querySelector('body');
 const currentDate = new Date();
-const week = ['Воскресенье', 'Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
-console.log(currentDate.getDay() );
+let options = {
+	weekday: 'long'
+};
+const week = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота', 'Воскресенье'];
+let currentDay = currentDate.toLocaleString('ru', options);
+currentDay = currentDay[0].toUpperCase() + currentDay.slice(1);
+
 
 week.forEach(function(elem, index ) {
 	let par = document.createElement('p');
 	par.textContent = elem;
-	if (index === 0 || index === 6) {
+	if (elem === 'Суббота' || elem === 'Воскресенье') {
 		par.style.fontStyle = 'italic';
 	}
-	if ( index === (currentDate.getDay())) {
+	if ( elem === currentDay) {
 		par.style.fontWeight = 'bold';
 	}
 	body.append(par);
