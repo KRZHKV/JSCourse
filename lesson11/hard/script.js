@@ -212,7 +212,7 @@ salaryAmount.addEventListener('input', function() {
 	}
 	expensesAmount.forEach( (elem) => {
 		elem.addEventListener('input', (e) => {
-			e.value = e.value.replace(/[^А-я]/, '');
+			e.value = e.value.replace(/[^А-я]/ig, '');
 		});
 	});
 
