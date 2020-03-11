@@ -14,7 +14,7 @@ let start = document.getElementById('start'),
 	incomePeriodValue = document.getElementsByClassName('income_period-value')[0],
 	targetMonthValue = document.getElementsByClassName('target_month-value')[0],
 	salaryAmount = document.querySelector('.salary-amount'),
-	expensesTitle = document.querySelector('.expenses-title'),
+	expensesTitle = document.querySelectorAll('.expenses-title'),
 	expensesItems = document.querySelectorAll('.expenses-items'),
 	depositAmount = document.querySelector('.deposit-amount'),
 	depositPercent = document.querySelector('.deposit-percent'),
@@ -24,7 +24,7 @@ let start = document.getElementById('start'),
 	cancel = document.querySelector('#cancel'),
 	expensesItem = document.querySelector('.additional_expenses-item'),
 	incomeItems = document.querySelectorAll('.income-items'),
-	incomeTitle = document.querySelector('.income-title'),
+	incomeTitle = document.querySelectorAll('.income-title'),
 	incomeAmount = document.querySelectorAll('.income-amount'),
 	expensesAmount = document.querySelectorAll('.expenses-amount');
 
@@ -87,6 +87,10 @@ let appData = {
 	},
 	addExpensesBlock: function() {
 		let cloneExpensesItem = expensesItems[0].cloneNode(true);
+		let inputExpense = cloneExpensesItem.querySelectorAll('input');
+		inputExpense.forEach( (elem) => {
+			elem.value = '';
+		});
 		expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesAdd);
 		expensesItems = document.querySelectorAll('.expenses-items');
 
@@ -96,7 +100,10 @@ let appData = {
 	},
 	addIncomeBlock: function() {
 		let cloneIncomeItem = incomeItems[0].cloneNode(true);
-		let cloneIncomeItem.querySelectorAll('input');
+		let inputIncome = cloneIncomeItem.querySelectorAll('input');
+		inputIncome.forEach( (elem) => {
+			elem.value = '';
+		});
 		incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeAdd);
 		incomeItems = document.querySelectorAll('.income-items');
 
@@ -205,15 +212,43 @@ periodSelect.addEventListener('input', appData.changePeriod);
 start.disabled = true;
 
 salaryAmount.addEventListener('input', function() {
+	salaryAmount.value = salaryAmount.value.replace(/[\D]/ig, '');
 	if (salaryAmount.value === '') {
 		start.disabled = true;
 	} else {
 		start.disabled = false;
 	}
-	expensesAmount.forEach( (elem) => {
-		elem.addEventListener('input', (e) => {
-			e.value = e.value.replace(/[^А-я]/ig, '');
-		});
-	});
+});
 
+expensesAmount.forEach( (elem) => {
+	elem.addEventListener('input', (elem) => {
+		elem.target.value = elem.target.value.replace(/[\D]/ig, '');
+	});
+});
+incomeAmount.forEach( (elem) => {
+	elem.addEventListener('input', (elem) => {
+		elem.target.value = elem.target.value.replace(/[\D]/ig, '');
+	});
+});
+targetAmount.addEventListener('input', () => {
+	targetAmount.value = targetAmount.value.replace(/[\D]/ig, '');
+});
+incomeTitle.forEach( (elem) => {
+	elem.addEventListener('input', (elem) => {
+		elem.target.value = elem.target.value.replace(/[^А-я]/ig, '');
+	})
+});
+expensesTitle.forEach( (elem) => {
+	elem.addEventListener('input', (elem) => {
+		elem.target.value = elem.target.value.replace(/[^А-я]/ig, '');
+	})
+});
+incomeItem.forEach( (elem) => {
+	elem.addEventListener('input', (elem) => {
+		elem.target.value = elem.target.value.replace(/[^А-я]/ig, '');
+	})
+});
+
+expensesItem.addEventListener('input', (elem) => {
+	expensesItem.value = expensesItem.value.replace(/[^А-я]/ig, '');
 });
